@@ -1,6 +1,7 @@
+const { router } = require('../app');
 const Test = require('../models/Test');
 
-// exports.submitTest = async (req, res) => {
+// const submitTest = async (req, res) => {
 //   const { answers } = req.body;
 //   try {
 //     const test = await Test.create({ user: req.user.id, answers });
@@ -9,3 +10,5 @@ const Test = require('../models/Test');
 //     res.status(400).json({ error: error.message });
 //   }
 // };
+
+

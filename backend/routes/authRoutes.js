@@ -1,24 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const { register, login } = require('../controllers/authController');
 const User = require('../models/User'); // Adjust path to your User model
 const jwt = require('jsonwebtoken');
 
-
-
-// Registration endpoint
-// router.post('/register', async (req, res) => {
-//   const { email, password } = req.body;
- 
-
-//   try {
-//     // Create a new user or handle registration logic
-//     const User = await User.create({ email, password });
-//     res.status(201).json({ message: 'User registered successfully' });
-//   } catch (error) {
-//     res.status(400).json({ message: error.message });
-//   }
-// });
 
 router.post('/register',async (req, res) => {
       const { email, password } = req.body;
@@ -49,9 +33,5 @@ router.post('/login', async (req, res) => {
     }
   });
 
-
-// router.post('/register', register);
-
-// router.post('/login', login);
 
 module.exports = router;

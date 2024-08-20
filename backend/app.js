@@ -8,20 +8,14 @@ const app = express();
 
 connectDB();
 app.use(express.json());
-// For registering
 
-app.use(cors({
-    origin: 'http://localhost:3000' // Replace with your frontend's URL if different
-  }));
-  app.use('/api/auth', require('./routes/authRoutes'));
 
-// For Logging in
   app.use(cors({
     origin: 'http://localhost:3000' // Replace with your frontend's URL if different
   }));
   app.use('/api/auth', require('./routes/authRoutes'));
   // app.use('/api/auth', authRoutes);
-// app.use('/api/test', testRoutes);
+app.use('/api/test', testRoutes);
 
 app.get('/',function(req,res){
     res.send("Hi Vaibhav How are you")

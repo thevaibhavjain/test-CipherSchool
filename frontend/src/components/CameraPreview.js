@@ -1,33 +1,40 @@
 import React, { useState, useEffect } from 'react';
-
+import './CameraPreview.css'
 const CameraPreview = () => {
-  const [cameraPermission, setCameraPermission] = useState(false);
+  const [permissionsGranted, setPermissionsGranted] = useState({
+    camera: false,
+    microphone: false,
+  });
   const [stream, setStream] = useState(null);
 
   useEffect(() => {
-    const requestCameraPermission = async () => {
+    const requestPermissions = async () => {
       try {
-        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        // Requests both camera and microphone permissions
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
         setStream(stream);
-        setCameraPermission(true);
+        setPermissionsGranted({ camera: true, microphone: true });
       } catch (error) {
-        setCameraPermission(false);
-        alert('Camera permission is required to start the test.');
+        setPermissionsGranted({ camera: false, microphone: false });
+        alert('Camera and microphone permissions are required to start the test.');
       }
     };
 
-    requestCameraPermission();
+    requestPermissions();
   }, []);
 
   return (
-    <div>
-      {cameraPermission ? (
+    <div >
+      {permissionsGranted.camera && permissionsGranted.microphone ? (
+        <div className="preview-container">
         <video autoPlay ref={(video) => video && stream && (video.srcObject = stream)} />
+        </div>
       ) : (
-        <p>Camera permission denied.</p>
+        <p>Camera and microphone permissions are required to start the test. Please allow them.</p>
       )}
     </div>
   );
 };
+
 
 export default CameraPreview;

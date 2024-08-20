@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { registerUser } from '../api';
 import './Register.css';
+import CipherSchoolsLogo from '../Cipherschools.png'; 
+
 const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -8,9 +10,6 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Ensure that email and password are strings
-      // const userEmail = String(email);
-      // const userPassword = String(password);
 
       await registerUser({ email, password });
       alert('Registration Successful. Please log in.');
@@ -27,7 +26,7 @@ const Register = () => {
   return (
     <div class="wrapper">
        <div class="logo">
-
+       <img src={CipherSchoolsLogo} alt="Cipher Schools Logo" className="logo-image" />
        </div>
       <div class="text-center mt-4 name">
         Register

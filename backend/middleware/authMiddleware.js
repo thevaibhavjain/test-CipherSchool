@@ -12,10 +12,13 @@ exports.protect = async (req, res, next) => {
   }
 
   try {
-    const decoded = jwt.verify(token, 'vaibhav');
+    const decoded = jwt.verify(token, 'vaibhav'); // Ensure 'vaibhav' is the correct JWT secret
     req.user = await User.findById(decoded.id).select('-password');
+    if (!req.user) {
+      return res.status(401).json({ error: 'User not found' });
+    }
     next();
   } catch (error) {
-    res.status(401).json({ error: 'Token failed' });
-  }
+    res.status(401).json({ error: 'Token failed' });
+  }
 };
